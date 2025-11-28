@@ -1,0 +1,86 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+- workflow_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: test_dia_min_phx
+      id: test_dia_min_phx
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test_dia_min_phx
+        setup-command: ''
+        command: python main.py
+        input: ''
+        expected-output: 'El día con la temperatura minima en Phoenix fue: 2016-03-02 12:00:00'
+        comparison-method: contains
+        timeout: 5
+        max-score: 20
+    - name: test_temp_min_phx
+      id: test_temp_min_phx
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test_temp_min_phx
+        setup-command: ''
+        command: python main.py
+        input: ''
+        expected-output: 'La temperatura minima registrada en Phoenix fue de: -0.15 °C'
+        comparison-method: contains
+        timeout: 5
+        max-score: 20
+    - name: test_dia_max_phx
+      id: test_dia_max_phx
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test_dia_max_phx
+        setup-command: ''
+        command: python main.py
+        input: ''
+        expected-output: 'El día con la temperatura maxima en Phoenix fue: 2016-06-19 21:00:00'
+        comparison-method: contains
+        timeout: 5
+        max-score: 20
+    - name: test_temp_max_phx
+      id: test_temp_max_phx
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test_temp_max_phx
+        setup-command: ''
+        command: python main.py
+        input: ''
+        expected-output: 'La temperatura maxima registrada en Phoenix fue de: 47.85 °C'
+        comparison-method: contains
+        timeout: 5
+        max-score: 20
+    - name: test_temp_prom_phx
+      id: test_temp_prom_phx
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test_temp_prom_phx
+        setup-command: ''
+        command: python main.py
+        input: ''
+        expected-output: 'La temperatura promedio durante 2016 en Phoenix fue de: 23.2 °C'
+        comparison-method: contains
+        timeout: 5
+        max-score: 20
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST_DIA_MIN_PHX_RESULTS: "${{steps.test_dia_min_phx.outputs.result}}"
+        TEST_TEMP_MIN_PHX_RESULTS: "${{steps.test_temp_min_phx.outputs.result}}"
+        TEST_DIA_MAX_PHX_RESULTS: "${{steps.test_dia_max_phx.outputs.result}}"
+        TEST_TEMP_MAX_PHX_RESULTS: "${{steps.test_temp_max_phx.outputs.result}}"
+        TEST_TEMP_PROM_PHX_RESULTS: "${{steps.test_temp_prom_phx.outputs.result}}"
+      with:
+        runners: test_dia_min_phx,test_temp_min_phx,test_dia_max_phx,test_temp_max_phx,test_temp_prom_phx
