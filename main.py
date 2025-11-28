@@ -22,13 +22,13 @@ def kelvin_to_celsius(kelvin):
 
 # Analisis
 
-# TODO: Imprime que día y hora se registró la temperatura mínima en Phoenix con el siguiente mensaje: "El día con la temperatura minima en Phoenix fue: {fecha}"
-# TODO: Imprime la temperatura mínima en Phoenix con el siguiente mensaje: "La temperatura minima registrada en Phoenix fue de: {temperatura} "°C""
+# TODO: Imprime que día y hora se registró la temperatura mínima en Phoenix con el siguiente mensaje: "El día con la temperatura mínima en Phoenix fue: {fecha}"
+# TODO: Imprime la temperatura mínima en Phoenix con el siguiente mensaje: "La temperatura mínima registrada en Phoenix fue de: ", temperatura, " °C""
 
-# TODO: Imprime que día y hora se registró la temperatura máxima en Phoenix con el siguiente mensaje: "El día con la temperatura maxima en Phoenix fue: {fecha}"
-# TODO: Imprime la temperatura máxima en Phoenix con el siguiente mensaje: "La temperatura maxima registrada en Phoenix fue de: {temperatura} "°C""
+# TODO: Imprime que día y hora se registró la temperatura máxima en Phoenix con el siguiente mensaje: "El día con la temperatura máxima en Phoenix fue: {fecha}"
+# TODO: Imprime la temperatura máxima en Phoenix con el siguiente mensaje: "La temperatura máxima registrada en Phoenix fue de: ", temperatura, " °C""
 
-# TODO: Imprime la temperatura promedio en Phoenix durante el año 2016 con el siguiente mensaje: "La temperatura promedio durante 2016 en Phoenix fue de: {temperatura} "°C""
+# TODO: Imprime la temperatura promedio en Phoenix durante el año 2016 con el siguiente mensaje: "La temperatura promedio durante 2016 en Phoenix fue de: ", temperatura, " °C""
 
 # Graficar la temperatura de Phoenix durante el año 2016
 plt.figure(figsize=(20, 10))
@@ -38,10 +38,10 @@ plt.xlabel('Fecha')
 plt.ylabel('Temperatura (°C)')
 plt.legend()
 plt.grid()
-# TODO: Guardar la figura como "temperatura_phoenix_2016.png"
-
+plt.savefig("temperatura_phoenix_2016.png")
 plt.show()
 
-# TODO: Exportar el DataFrame modificado a un nuevo archivo CSV llamado "temperatura_celsius.csv"
+# Exportar el DataFrame modificado a un nuevo archivo CSV
+df_celsius.to_csv("temperatura_celsius.csv")
 
 
